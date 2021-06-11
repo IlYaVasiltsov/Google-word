@@ -1,0 +1,21 @@
+import { DovumentServiceService, Document } from './../dovument-service.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss']
+})
+export class DialogComponent implements OnInit {
+
+  constructor(public docService: DovumentServiceService, @Inject(MAT_DIALOG_DATA) public data: {doc:Document}) { }
+
+  ngOnInit(): void {
+  }
+
+  saveChanges(){
+    this.docService.addDoc(this.data.doc);
+  }
+
+}

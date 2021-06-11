@@ -1,0 +1,124 @@
+<div (keydown.shift.p)="openSecDialog()">
+  <div class="header">
+    <div class="right">
+      <div>
+        <img class="logo"
+          src="../../assets/images/4525d2d8d34365b2aed627557c74ddc7750164ab07073028111d23f675a5fa3a_200.jpg">
+      </div>
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <input (keydown.enter)="addDoc()" matInput type="text" [(ngModel)]="title" placeholder="New document">
+
+        </mat-form-field>
+        <br>
+        <button mat-button [matMenuTriggerFor]="menu">Файл</button>
+        <mat-menu #menu="matMenu">
+          <button (click)="openDialog()" mat-menu-item>Создать</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu1">Правка</button>
+        <mat-menu #menu1="matMenu">
+          <button mat-menu-item>Empty</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu2">Вид</button>
+        <mat-menu #menu2="matMenu">
+          <button mat-menu-item>Empty</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu3">Вставка</button>
+        <mat-menu #menu3="matMenu">
+          <button mat-menu-item>Empty</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu4">Формат</button>
+        <mat-menu #menu4="matMenu">
+          <button mat-menu-item>Empty</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu5">Инструменты</button>
+        <mat-menu #menu5="matMenu">
+          <button mat-menu-item>Empty</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu6">Дополнения</button>
+        <mat-menu #menu6="matMenu">
+          <button mat-menu-item>Empty</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu7">Справка</button>
+        <mat-menu #menu7="matMenu">
+          <button mat-menu-item>Empty</button>
+        </mat-menu>
+      </div>
+
+    </div>
+    <div class="left">
+      <button mat-button (click)="editDoc(currIdx)">Сохранить</button>
+      <img class="person" src="../../assets/images/b400851a6b07f8877a9236f275bd8d4f.jpg" alt="">
+    </div>
+
+  </div>
+  <div>
+    <mat-form-field class="fill-family">
+      <mat-label>Выберете стиль текста</mat-label>
+      <mat-select [(value)]="selected">
+        <mat-option>Стандартный</mat-option>
+        <mat-option value='Arial, Helvetica, sans-serif'>Arial</mat-option>
+        <mat-option value='"Times New Roman"'>Times new roman</mat-option>
+        <mat-option value="'Calibri'">Calibri</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Выберете размер текста</mat-label>
+      <input matInput type="number" [(ngModel)]="weight" placeholder="">
+    </mat-form-field>
+
+    <button class="btn" mat-stroked-button [(colorPicker)]="color" [style.background]="color">color</button>
+
+    <mat-button-toggle-group [(value)]="form" class="align" #group="matButtonToggleGroup">
+      <mat-button-toggle value="left" aria-label="Text align left">
+        <mat-icon>format_align_left</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="center" aria-label="Text align center">
+        <mat-icon>format_align_center</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="right" aria-label="Text align right">
+        <mat-icon>format_align_right</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="justify" aria-label="Text align justify">
+        <mat-icon>format_align_justify</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-button-toggle-group name="fontStyle" [(value)]="style" aria-label="Font Style">
+      <mat-button-toggle value="bold">Bold</mat-button-toggle>
+      <mat-button-toggle value="italic">Italic</mat-button-toggle>
+      <mat-button-toggle value="underline">Underline</mat-button-toggle>
+      <mat-button-toggle>None</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <button (click)="createElement()">T</button>
+
+
+
+    <div>
+    </div>
+
+    <div class="doc-body">
+      <mat-card class="card-collect">
+        <div>
+          <mat-card class="card">
+            <textarea class="structure"  name="{{currIdx}}" (keydown)="onKeydown($event)" [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
+         'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}" matInput type="text"
+              [(ngModel)]="body">
+      </textarea>
+          </mat-card>
+        </div>
+        <div>
+          <mat-list class="list">
+            <mat-list-item *ngFor="let docs of docService.docs ; let i = index" role="listitem">
+              <button class="button" (click)="checkDoc(i,docs.id)" mat-button><span>{{i+1}}.{{docs.title}}</span>
+                <button mat-stroked-button (click)="openEditDialog(i)">Edit</button><button mat-stroked-button
+                  (click)="deleteDoc(docs.id)">x</button></button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card>
+    </div>
+  </div>
