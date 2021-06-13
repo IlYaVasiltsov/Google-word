@@ -19,6 +19,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { EditlistComponent } from './editlist/editlist.component';
 import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { ListDiComponent } from './list-di/list-di.component';
+import { TablediComponent } from './tabledi/tabledi.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { MatIconModule } from '@angular/material/icon';
     HeaderComponent,
     DialogComponent,
     PrintComponent,
-    EditlistComponent
+    EditlistComponent,
+    ListDiComponent,
+    TablediComponent
   ],
   imports: [
     BrowserModule,

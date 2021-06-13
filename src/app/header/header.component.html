@@ -70,6 +70,8 @@
     </mat-form-field>
 
     <button class="btn" mat-stroked-button [(colorPicker)]="color" [style.background]="color">color</button>
+    <button mat-stroked-button (click)="createElement()">List</button>
+    <button mat-stroked-button (click)="createSecElement()">Table</button>
 
     <mat-button-toggle-group [(value)]="form" class="align" #group="matButtonToggleGroup">
       <mat-button-toggle value="left" aria-label="Text align left">
@@ -93,7 +95,7 @@
       <mat-button-toggle>None</mat-button-toggle>
     </mat-button-toggle-group>
 
-    <button (click)="createElement()">T</button>
+
 
 
 
@@ -102,14 +104,18 @@
 
     <div class="doc-body">
       <mat-card class="card-collect">
-        <div>
-          <mat-card class="card">
-            <textarea class="structure"  name="{{currIdx}}" (keydown)="onKeydown($event)" [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
-         'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}" matInput type="text"
-              [(ngModel)]="body">
-      </textarea>
-          </mat-card>
-        </div>
+        <mat-card class="card">
+          <div contenteditable="true"  >
+            <ul><li *ngFor="let list of docService.list; let i = index">{{i}}</li></ul>
+
+            <!-- <tr class="table" >
+              <td >1 </td>
+            </tr> -->
+            <textarea matInput class="structure" id="{{qwe}}" (keydown)="onKeydown($event)"
+            [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
+            'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}"  type="text" [(ngModel)]="body"></textarea>
+          </div>
+        </mat-card>
         <div>
           <mat-list class="list">
             <mat-list-item *ngFor="let docs of docService.docs ; let i = index" role="listitem">
@@ -122,3 +128,11 @@
       </mat-card>
     </div>
   </div>
+
+
+  <!-- <mat-card class="card">
+    <textarea class="structure" id="{{qwe}}" (keydown)="onKeydown($event)" [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
+ 'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}" matInput type="text"
+      [(ngModel)]="body">
+</textarea>
+  </mat-card> -->

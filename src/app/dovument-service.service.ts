@@ -7,6 +7,9 @@ export interface Document {
   style?:any;
 }
 
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +27,8 @@ export class DovumentServiceService {
 
   ];
 
+  list = [];
+
 
   addDoc(doc:Document){
     this.docs.push(doc)
@@ -36,6 +41,16 @@ export class DovumentServiceService {
 
   deleteDoc(id) {
     this.docs = this.docs.filter(doc => doc.id !== id)
+  }
+
+  createElement() {
+     this.list.push(1);
+     console.log(this.list);
+  }
+
+  removeElement() {
+    this.list.shift();
+    console.log(this.list);
   }
 
 }

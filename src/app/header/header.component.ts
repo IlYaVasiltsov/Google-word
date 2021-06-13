@@ -1,3 +1,5 @@
+import { TablediComponent } from './../tabledi/tabledi.component';
+import { ListDiComponent } from './../list-di/list-di.component';
 import { EditlistComponent } from './../editlist/editlist.component';
 import { DialogComponent } from './../dialog/dialog.component';
 import { DovumentServiceService, Document } from './../dovument-service.service';
@@ -27,8 +29,10 @@ export class HeaderComponent implements OnInit{
   style;
   currIdx;
   currDoc;
-  valuebtn;
+  qwe;
+  qwer;
   glob;
+  count;
 
 
 
@@ -38,7 +42,8 @@ export class HeaderComponent implements OnInit{
 
 
   editDoc(i) {
-    let docBody = document.querySelector('.structure');
+
+    let docBody = document.querySelector(".structure");
     this.glob = docBody;
     console.log(docBody);
     const doc: Document = {
@@ -72,6 +77,9 @@ export class HeaderComponent implements OnInit{
     const currDoc = this.docService.docs[i];
     const body = currDoc.body;
     const title = currDoc.title;
+    this.qwe = currDoc.id.toString();
+    this.qwer = currDoc.id;
+    console.log(this.qwe);
     console.log(body);
     this.body = body;
     this.title = title;
@@ -79,15 +87,11 @@ export class HeaderComponent implements OnInit{
     console.log(this.currIdx);
     const idx = this.docService.docs.findIndex(doc => doc.id === id);
     console.log(idx);
-    // const stili = document.getElementsByName('currIdx');
-    // console.log(stili);
-    // const name = Number(stili);
-    // if (this.currIdx != name) {
-    //   console.log("work");
 
-    // }
-
-
+    if (id == this.qwer){
+    const aaa = document.getElementById(this.qwe);
+    console.log(aaa);
+    }
 
   }
 
@@ -124,10 +128,17 @@ export class HeaderComponent implements OnInit{
   }
 
   createElement() {
-    document.createElement('table');
+    const dialogRef = this.dialog.open(ListDiComponent);
+
+  }
+
+  createSecElement() {
+    const dialogRef = this.dialog.open(TablediComponent);
+
   }
 
   handleChange ($event:ColorEvent)  {
   }
 
 }
+

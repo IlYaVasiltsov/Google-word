@@ -1,0 +1,9 @@
+<mat-dialog-content class="mat-typography">
+  <ul><li *ngFor="let list of docService.list; let i = index">{{i}}</li></ul>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button (click)="createElement()"  mat-button>Добавить</button>
+    <button (click)="removeElement()"  mat-button>Убрать</button>
+
+    <button mat-button mat-dialog-close>Ок</button>
+  </mat-dialog-actions>
