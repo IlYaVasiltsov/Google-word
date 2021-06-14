@@ -28,6 +28,9 @@ export class DovumentServiceService {
   ];
 
   list = [];
+  table = [[],[]];
+  // tr = [];matrix = [[12, 34, 56], [78, 91, 10], [26, 83, 13]];
+  // td = [];
 
 
   addDoc(doc:Document){
@@ -53,4 +56,29 @@ export class DovumentServiceService {
     console.log(this.list);
   }
 
+  // addCol() {
+  //   this.tr.push(1)
+  //   console.log(this.tr)
+  // }
+
+  // removeCol() {
+  //   this.tr.shift()
+  // }
+
+  // addRow() {
+  //   this.td.push(1)
+  //   console.log(this.td)
+  // }
+
+  // removeRow() {
+  //   this.td.shift()
+  // }
+
+  addTable() {
+    this.table.push([1,1]);
+  }
+
+  removeTable() {
+    this.table.shift();
+  }
 }

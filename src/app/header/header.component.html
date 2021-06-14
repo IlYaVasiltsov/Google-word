@@ -106,11 +106,15 @@
       <mat-card class="card-collect">
         <mat-card class="card">
           <div contenteditable="true"  >
-            <ul><li *ngFor="let list of docService.list; let i = index">{{i}}</li></ul>
+            <ul *ngIf="docService.table.length>1" >
+              <li *ngFor="let list of docService.list; let i = index">{{i}}</li>
+            </ul>
+            <table *ngIf="docService.table.length>1" class="table">
+              <tr *ngFor="let tr of docService.table">
+                <td *ngFor="let td of tr">{{ td }}</td>
+              </tr>
+            </table>
 
-            <!-- <tr class="table" >
-              <td >1 </td>
-            </tr> -->
             <textarea matInput class="structure" id="{{qwe}}" (keydown)="onKeydown($event)"
             [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
             'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}"  type="text" [(ngModel)]="body"></textarea>

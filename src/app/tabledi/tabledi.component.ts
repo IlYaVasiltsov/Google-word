@@ -13,12 +13,26 @@ export class TablediComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createElement() {
+  // addCol() {
+  //   this.docService.addCol()
+  // }
 
+  // removeCol() {
+  //   this.docService.removeCol()
+  // }
+
+  // addRow() {
+  //   this.docService.addRow()
+  // }
+  // removeRow() {
+  //   this.docService.removeRow()
+  // }
+
+  addTable() {
+    this.docService.addTable();
   }
 
-  removeElement() {
-
+  removeTable() {
+    this.docService.removeTable();
   }
-
 }
