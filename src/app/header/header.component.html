@@ -1,4 +1,79 @@
-<div (keydown.shift.p)="openSecDialog()">
+<div class="header">
+  <div class="right">
+    <div>
+      <img class="logo"
+        src="../../assets/images/4525d2d8d34365b2aed627557c74ddc7750164ab07073028111d23f675a5fa3a_200.jpg">
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width">
+        <input (keydown.enter)="addDoc()" matInput type="text" [(ngModel)]="title" placeholder="New document">
+
+      </mat-form-field>
+      <br>
+      <button mat-button [matMenuTriggerFor]="menu">Файл</button>
+      <mat-menu #menu="matMenu">
+        <button (click)="openDialog()" mat-menu-item>Создать</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu1">Правка</button>
+      <mat-menu #menu1="matMenu">
+        <button mat-menu-item>Empty</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu2">Вид</button>
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item>Empty</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu3">Вставка</button>
+      <mat-menu #menu3="matMenu">
+        <button mat-menu-item>Empty</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu4">Формат</button>
+      <mat-menu #menu4="matMenu">
+        <button mat-menu-item>Empty</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu5">Инструменты</button>
+      <mat-menu #menu5="matMenu">
+        <button mat-menu-item>Empty</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu6">Дополнения</button>
+      <mat-menu #menu6="matMenu">
+        <button mat-menu-item>Empty</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu7">Справка</button>
+      <mat-menu #menu7="matMenu">
+        <button mat-menu-item>Empty</button>
+      </mat-menu>
+    </div>
+
+  </div>
+  <div class="left">
+    <button mat-button (click)="editDoc(currIdx)">Сохранить</button>
+    <img class="person" src="../../assets/images/b400851a6b07f8877a9236f275bd8d4f.jpg" alt="">
+  </div>
+
+</div>
+
+<div class="all">
+<ckeditor class="ckeditor"
+  [(ngModel)]="ckeditorContent">
+    <!-- <ckbutton [name]="'saveButton'"
+      [command]="'saveCmd'"
+      (click)="save($event)"
+      [icon]="'save.png'"
+      [label]="'Save Document'"
+      [toolbar]="'clipboard,1'">
+    </ckbutton> -->
+</ckeditor>
+<mat-list class="list">
+  <mat-list-item *ngFor="let docs of docService.docs ; let i = index" role="listitem">
+    <button class="button" (click)="checkDoc(i,docs.id)" mat-button><span>{{i+1}}.{{docs.title}}</span>
+      <button mat-stroked-button (click)="openEditDialog(i)">Edit</button><button mat-stroked-button
+        (click)="deleteDoc(docs.id)">x</button></button>
+
+  </mat-list-item>
+</mat-list>
+</div>
+<!-- <div (keydown.shift.p)="openSecDialog()">
   <div class="header">
     <div class="right">
       <div>
@@ -105,19 +180,32 @@
     <div class="doc-body">
       <mat-card class="card-collect">
         <mat-card class="card">
-          <div contenteditable="true"  >
-            <ul *ngIf="docService.table.length>1" >
+          <div contenteditable="true">
+            <ul *ngIf="docService.table.length>1">
               <li *ngFor="let list of docService.list; let i = index">{{i}}</li>
             </ul>
-            <table *ngIf="docService.table.length>1" class="table">
-              <tr *ngFor="let tr of docService.table">
-                <td *ngFor="let td of tr">{{ td }}</td>
-              </tr>
-            </table>
+            <div *ngIf="tableOn">
+              <div class="demo-button-container">
+                <button mat-raised-button (click)="addData()" class="demo-button">Add data</button>
+                <button mat-raised-button (click)="addColumn()"> Add column </button>
+                <button mat-raised-button (click)="removeColumn()"> Remove column </button>
+                <button mat-raised-button [disabled]="!dataSource.length" (click)="removeData()" class="demo-button">Remove data</button>
+              </div>
 
-            <textarea matInput class="structure" id="{{qwe}}" (keydown)="onKeydown($event)"
-            [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
-            'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}"  type="text" [(ngModel)]="body"></textarea>
+              <table contenteditable="true" mat-table [dataSource]="data" [dataSource]="dataSource"
+                class="mat-elevation-z8">
+                <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+                  <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+              </table>
+            </div>
+            <textarea matInput class="structure" id="{{qwe}}" (keydown)="onKeydown($event)" [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
+            'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}" type="text"
+              [(ngModel)]="body"></textarea>
           </div>
         </mat-card>
         <div>
@@ -131,12 +219,7 @@
         </div>
       </mat-card>
     </div>
-  </div>
+  </div> -->
 
 
-  <!-- <mat-card class="card">
-    <textarea class="structure" id="{{qwe}}" (keydown)="onKeydown($event)" [ngStyle]="{'font-size.px': this.weight , 'color': this.color ,'font-weight':this.style,'text-decoration':this.style,
- 'font-style':this.style, 'font-family': this.selected, 'text-align': this.form}" matInput type="text"
-      [(ngModel)]="body">
-</textarea>
-  </mat-card> -->
+

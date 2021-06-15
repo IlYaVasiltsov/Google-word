@@ -21,6 +21,9 @@ import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { ListDiComponent } from './list-di/list-di.component';
 import { TablediComponent } from './tabledi/tabledi.component';
+import {MatTableModule} from '@angular/material/table';
+import { CKEditorModule } from 'ng2-ckeditor';
+
 
 
 @NgModule({
@@ -48,6 +51,9 @@ import { TablediComponent } from './tabledi/tabledi.component';
     ColorPickerModule,
     MatButtonToggleModule,
     MatIconModule,
+    MatTableModule,
+    CKEditorModule,
+
    ],
   providers: [
     HeaderComponent,

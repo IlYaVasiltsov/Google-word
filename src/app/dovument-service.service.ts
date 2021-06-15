@@ -7,6 +7,12 @@ export interface Document {
   style?:any;
 }
 
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
 
 
@@ -25,6 +31,19 @@ export class DovumentServiceService {
     {id:2,title:"Document 2", body:"body text of document 2"},
     {id:3,title:"Document 3", body:"body text of document 3"},
 
+  ];
+
+   ELEMENT_DATA: PeriodicElement[] = [
+    {position: 1, name: "none", weight: 1.0079, symbol: 'H'},
+    {position: 2, name: "none", weight: 4.0026, symbol: 'He'},
+    {position: 3, name: "none", weight: 6.941, symbol: 'Li'},
+    {position: 4, name: "none", weight: 9.0122, symbol: 'Be'},
+    {position: 5, name: "none", weight: 10.811, symbol: 'B'},
+    // {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+    // {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+    // {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+    // {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+    // {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
 
   list = [];

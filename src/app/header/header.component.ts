@@ -2,11 +2,13 @@ import { TablediComponent } from './../tabledi/tabledi.component';
 import { ListDiComponent } from './../list-di/list-di.component';
 import { EditlistComponent } from './../editlist/editlist.component';
 import { DialogComponent } from './../dialog/dialog.component';
-import { DovumentServiceService, Document } from './../dovument-service.service';
-import { Component,  OnInit } from '@angular/core';
+import { DovumentServiceService, Document, PeriodicElement } from './../dovument-service.service';
+import { Component,ViewChild,  OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintComponent } from '../print/print.component';
 import { ColorEvent } from 'ngx-color';
+import {MatTable} from '@angular/material/table';
+
 
 @Component({
   selector: 'app-header',
@@ -24,8 +26,9 @@ export class HeaderComponent implements OnInit{
   weight="";
   body = "";
   form="";
-  id = Date.now()
+  id = Date.now();
   text:string;
+  ckeditorContent="";
   style;
   currIdx;
   currDoc;
@@ -33,8 +36,11 @@ export class HeaderComponent implements OnInit{
   qwer;
   glob;
   count;
-
-
+  displayedColumns: string[] = ['none1', 'none2', 'none3', 'none4'];
+  dataSource = [...this.docService.ELEMENT_DATA];
+  columnsToDisplay: string[] = this.displayedColumns.slice();
+  data: PeriodicElement[] = this.docService.ELEMENT_DATA;
+  tableOn:boolean;
 
   ngOnInit(): void {
   }
@@ -49,7 +55,7 @@ export class HeaderComponent implements OnInit{
     const doc: Document = {
       id: this.id,
       title: this.title,
-      body: this.body,
+      body: this.ckeditorContent,
       style: docBody
     }
 
@@ -60,7 +66,7 @@ export class HeaderComponent implements OnInit{
 
     const doc: Document = {
       id: this.id,
-      title: this.title,
+      title: this.ckeditorContent,
       body: this.body
     }
     this.docService.addDoc(doc)
@@ -81,18 +87,16 @@ export class HeaderComponent implements OnInit{
     this.qwer = currDoc.id;
     console.log(this.qwe);
     console.log(body);
-    this.body = body;
+    this.ckeditorContent = body;
     this.title = title;
     this.currIdx = i;
     console.log(this.currIdx);
     const idx = this.docService.docs.findIndex(doc => doc.id === id);
     console.log(idx);
+  }
 
-    if (id == this.qwer){
-    const aaa = document.getElementById(this.qwe);
-    console.log(aaa);
-    }
-
+  openDoc() {
+    const dialogref = this.dialog.open(DialogComponent) ;
   }
 
   openDialog() {
@@ -133,12 +137,36 @@ export class HeaderComponent implements OnInit{
   }
 
   createSecElement() {
-    const dialogRef = this.dialog.open(TablediComponent);
-
+    this.tableOn = !this.tableOn;
   }
 
   handleChange ($event:ColorEvent)  {
   }
+
+  @ViewChild(MatTable) table: MatTable<PeriodicElement>;
+
+  addData() {
+    const randomElementIndex = Math.floor(Math.random() * this.docService.ELEMENT_DATA.length);
+    this.dataSource.push(this.docService.ELEMENT_DATA[randomElementIndex]);
+    this.table.renderRows();
+  }
+
+  removeData() {
+    this.dataSource.pop();
+    this.table.renderRows();
+  }
+
+    addColumn() {
+      const randomColumn = Math.floor(Math.random() * this.displayedColumns.length);
+      this.columnsToDisplay.push(this.displayedColumns[randomColumn]);
+    }
+
+    removeColumn() {
+      if (this.columnsToDisplay.length) {
+        this.columnsToDisplay.pop();
+      }
+    }
+
 
 }
 

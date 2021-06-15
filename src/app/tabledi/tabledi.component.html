@@ -1,19 +1,33 @@
-<mat-dialog-content class="mat-typography">
 
-  <table class="table">
-    <tr class="th" *ngFor="let tr of docService.table">
-      <td *ngFor="let td of tr">{{ td }}</td>
-    </tr>
+  <div class="demo-button-container">
+    <button mat-raised-button (click)="addData()" class="demo-button">
+      Add data
+    </button>
+    <button mat-raised-button (click)="addColumn()"> Add column </button>
+<button mat-raised-button (click)="removeColumn()"> Remove column </button>
+    <button
+        mat-raised-button
+        [disabled]="!dataSource.length"
+        (click)="removeData()"
+        class="demo-button">
+      Remove data
+    </button>
+  </div>
 
+  <table contenteditable="true" mat-table [dataSource]="data" [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
   </table>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button (click)="addTable()" mat-button>Добавить</button>
-  <!-- <button (click)="removeCol()"  mat-button>Убрать столбец</button>
-    <button (click)="addRow()"  mat-button>Добавить строку</button> -->
-  <button (click)="removeTable()" mat-button>Убрать</button>
-  <button mat-button mat-dialog-close>Ок</button>
-</mat-dialog-actions>
+
+
+
+
+
 
 
 

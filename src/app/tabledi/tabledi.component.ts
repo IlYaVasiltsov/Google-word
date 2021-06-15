@@ -1,5 +1,9 @@
-import { DovumentServiceService } from './../dovument-service.service';
-import { Component, OnInit } from '@angular/core';
+import { DovumentServiceService, PeriodicElement } from './../dovument-service.service';
+import { Component, ViewChild,OnInit } from '@angular/core';
+import {MatTable} from '@angular/material/table';
+
+
+
 
 @Component({
   selector: 'app-tabledi',
@@ -10,29 +14,39 @@ export class TablediComponent implements OnInit {
 
   constructor(public docService: DovumentServiceService) { }
 
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = [...this.docService.ELEMENT_DATA];
+  columnsToDisplay: string[] = this.displayedColumns.slice();
+  data: PeriodicElement[] = this.docService.ELEMENT_DATA;
   ngOnInit(): void {
+
   }
 
-  // addCol() {
-  //   this.docService.addCol()
-  // }
 
-  // removeCol() {
-  //   this.docService.removeCol()
-  // }
+  @ViewChild(MatTable) table: MatTable<PeriodicElement>;
 
-  // addRow() {
-  //   this.docService.addRow()
-  // }
-  // removeRow() {
-  //   this.docService.removeRow()
-  // }
-
-  addTable() {
-    this.docService.addTable();
+  addData() {
+    const randomElementIndex = Math.floor(Math.random() * this.docService.ELEMENT_DATA.length);
+    this.dataSource.push(this.docService.ELEMENT_DATA[randomElementIndex]);
+    this.table.renderRows();
   }
 
-  removeTable() {
-    this.docService.removeTable();
+  removeData() {
+    this.dataSource.pop();
+    this.table.renderRows();
   }
+
+    addColumn() {
+      const randomColumn = Math.floor(Math.random() * this.displayedColumns.length);
+      this.columnsToDisplay.push(this.displayedColumns[randomColumn]);
+    }
+
+    removeColumn() {
+      if (this.columnsToDisplay.length) {
+        this.columnsToDisplay.pop();
+      }
+    }
+
 }
+
+
