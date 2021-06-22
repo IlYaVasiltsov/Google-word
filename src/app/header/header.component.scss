@@ -6,6 +6,7 @@
 .person {
   height: 60px;
   width: 80px;
+
 }
 
 .align{
@@ -79,15 +80,6 @@ margin-bottom: 10px;
   font-size: 8px;
 }
 
-
-button {
-  margin-left: 15px;
-}
-
-.btn {
-  margin-left: 10px;
-}
-
 .button:focus {
   background-color: lightblue;
 }
@@ -116,15 +108,36 @@ justify-content: space-between;
 
 }
 .all {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  // align-items: center;
+  justify-content: flex-start;
+
 }
 
-.list {
-  width: 20%;
-}
+
 
 .ckeditor {
   width: 80%;
+}
+
+.left {
+height: 30px;
+margin: 10px;
+}
+
+.zxc {
+  display: flex;
+  align-items: flex-start;
+  height: 80px;
+}
+
+.list {
+  width: 15%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 40px;
+}
+
+.listitem {
+  margin-bottom: 30px;
 }

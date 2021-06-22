@@ -1,6 +1,9 @@
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule,Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -23,8 +26,8 @@ import { ListDiComponent } from './list-di/list-di.component';
 import { TablediComponent } from './tabledi/tabledi.component';
 import {MatTableModule} from '@angular/material/table';
 import { CKEditorModule } from 'ng2-ckeditor';
-
-
+import { DeldialogComponent } from './deldialog/deldialog.component';
+import { NgpImagePickerModule } from 'ngp-image-picker';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     PrintComponent,
     EditlistComponent,
     ListDiComponent,
-    TablediComponent
+    TablediComponent,
+    DeldialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     MatIconModule,
     MatTableModule,
     CKEditorModule,
-
+    RouterModule,
+    NgpImagePickerModule,
    ],
   providers: [
     HeaderComponent,

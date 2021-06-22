@@ -1,4 +1,4 @@
-import { TablediComponent } from './../tabledi/tabledi.component';
+import { DeldialogComponent } from './../deldialog/deldialog.component';
 import { ListDiComponent } from './../list-di/list-di.component';
 import { EditlistComponent } from './../editlist/editlist.component';
 import { DialogComponent } from './../dialog/dialog.component';
@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PrintComponent } from '../print/print.component';
 import { ColorEvent } from 'ngx-color';
 import {MatTable} from '@angular/material/table';
+import { ImagePickerConf } from 'ngp-image-picker';
 
 
 @Component({
@@ -19,13 +20,15 @@ export class HeaderComponent implements OnInit{
 
 
   constructor(public docService: DovumentServiceService, public dialog: MatDialog) { }
-  title:string;
+  title="";
   color='';
   selected='';
   select = "" ;
   weight="";
   body = "";
   form="";
+  a="";
+  b="";
   id = Date.now();
   text:string;
   ckeditorContent="";
@@ -41,6 +44,12 @@ export class HeaderComponent implements OnInit{
   columnsToDisplay: string[] = this.displayedColumns.slice();
   data: PeriodicElement[] = this.docService.ELEMENT_DATA;
   tableOn:boolean;
+  imagePickerConf: ImagePickerConf = {
+    borderRadius: "4px",
+    language: "en",
+    width: "120px",
+    height: "120px",
+  };
 
   ngOnInit(): void {
   }
@@ -75,7 +84,7 @@ export class HeaderComponent implements OnInit{
   }
 
   deleteDoc(id) {
-    this.docService.deleteDoc(id)
+    this.docService.deleteDoc(id);
 
   }
 
@@ -102,8 +111,8 @@ export class HeaderComponent implements OnInit{
   openDialog() {
     const doc: Document = {
       id: this.id,
-      title: this.title,
-      body: this.body
+      title: this.a,
+      body: this.b
     }
     const dialogRef = this.dialog.open(DialogComponent, {
       data: { doc },
@@ -167,6 +176,17 @@ export class HeaderComponent implements OnInit{
       }
     }
 
+    openDelDialog(id) {
+      const currId = id;
+      const dialogref = this.dialog.open(DeldialogComponent, {
+        data: {currId},
+      });
+      this.ckeditorContent = "";
+      this.title = "Новый документ";
+    }
 
+    // route() {
+    //   this.router.navigate(['/upload']);
+    // }
 }
 

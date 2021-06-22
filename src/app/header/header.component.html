@@ -43,35 +43,32 @@
       <mat-menu #menu7="matMenu">
         <button mat-menu-item>Empty</button>
       </mat-menu>
+      <button mat-button (click)="editDoc(currIdx)">Сохранить</button>
+
     </div>
 
   </div>
   <div class="left">
-    <button mat-button (click)="editDoc(currIdx)">Сохранить</button>
-    <img class="person" src="../../assets/images/b400851a6b07f8877a9236f275bd8d4f.jpg" alt="">
+    <ngp-image-picker [_config]="imagePickerConf"></ngp-image-picker>
   </div>
 
 </div>
 
 <div class="all">
-<ckeditor class="ckeditor"
-  [(ngModel)]="ckeditorContent">
-    <!-- <ckbutton [name]="'saveButton'"
-      [command]="'saveCmd'"
-      (click)="save($event)"
-      [icon]="'save.png'"
-      [label]="'Save Document'"
-      [toolbar]="'clipboard,1'">
-    </ckbutton> -->
-</ckeditor>
-<mat-list class="list">
-  <mat-list-item *ngFor="let docs of docService.docs ; let i = index" role="listitem">
-    <button class="button" (click)="checkDoc(i,docs.id)" mat-button><span>{{i+1}}.{{docs.title}}</span>
-      <button mat-stroked-button (click)="openEditDialog(i)">Edit</button><button mat-stroked-button
-        (click)="deleteDoc(docs.id)">x</button></button>
+  <ckeditor class="ckeditor" [(ngModel)]="ckeditorContent">
+  </ckeditor>
+  <mat-list class="list">
+    <mat-list-item class="listitem" *ngFor="let docs of docService.docs ; let i = index" role="listitem">
+      <div class="zxc">
+        <div>
+          <button class="button" (click)="checkDoc(i,docs.id)" mat-button>{{i+1}}. {{docs.title}}</button>
+          <button mat-stroked-button (click)="openEditDialog(i)">Edit</button>
+          <button mat-stroked-button (click)="openDelDialog(docs.id)">x</button>
+        </div>
+      </div>
 
-  </mat-list-item>
-</mat-list>
+    </mat-list-item>
+  </mat-list>
 </div>
 <!-- <div (keydown.shift.p)="openSecDialog()">
   <div class="header">
@@ -220,6 +217,3 @@
       </mat-card>
     </div>
   </div> -->
-
-
-

@@ -14,6 +14,14 @@ export interface PeriodicElement {
   symbol: string;
 }
 
+export interface ImagePickerConf {
+  width?: string;
+  height?: string;
+  borderRadius?: string;
+  compressInitial?: boolean;
+  language?: string;
+}
+
 
 
 @Injectable({
@@ -62,7 +70,8 @@ export class DovumentServiceService {
   }
 
   deleteDoc(id) {
-    this.docs = this.docs.filter(doc => doc.id !== id)
+    this.docs = this.docs.filter(doc => doc.id !== id);
+
   }
 
   createElement() {
